@@ -104,9 +104,22 @@ function disableCards() {
     firstCard.classList.add('matched');
     secondCard.classList.add('matched');
     resetBoard();
+
+    //check if all cards matched
+    checkWinCondition();
 }
  
 /* ---------------------  Everything under has already been done for you -------------------------- */
+
+function checkWinCondition() {
+    const matchedCards = document.querySelectorAll('.card.matched');
+    if (matchedCards.length === cards.length) {
+        // show win message
+        const winMessage = document.getElementById('win-message');
+        winMessage.style.display = 'block';
+        winMessage.classList.add('fade-in');
+    }
+}
 
 function unflipCards() {
 
@@ -126,6 +139,10 @@ function unflipCards() {
 
 function resetBoard() {
     [firstCard, secondCard, lockBoard] = [null, null, false];
+    //hide win message
+    const winMessage = document.getElementById('win-message');
+    winMessage.style.display = 'none';
+    winMessage.classList.remove('fade-in');
 }
 
 // Function to shuffle an array
@@ -136,7 +153,7 @@ function shuffleArray(array) {
     }
 }
 
+//restarts the game
 document.getElementById('restart-btn').addEventListener('click', initGame);
-
 
 initGame();
